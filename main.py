@@ -167,7 +167,10 @@ def optionAdjust(index):
             optionAdjust(1)
         
     elif index == 2:
-        pass
+        print("[Worker level]")
+        print("Current value: "+readCurrentValue(absPath+"/config.conf", "worker")+"\n")
+        option=optionInput("value")
+        insertLines(absPath+"/config.conf", 1, "worker="+option)
     elif index == 3:
         pass
     elif index == 4:
