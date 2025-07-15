@@ -59,6 +59,22 @@ def insertLines(filename, line, content):
     #写行
     with open(filename, 'r+') as f:
         f.writelines(lines)
+
+def readCurrentValue(filename, option): #只用于设置读取当前值！不要用在其他地方！
+    with open(filename, 'r') as f:
+        lines = f.readlines()
+        for i in lines:
+            if i.startswith(option):
+                return i.split("=")[1].strip()
+    '''
+    temp = open(absPath+"/config.conf", "r")
+        tempList=temp.readlines()
+        for i in tempList:
+            if i.startswith("language"):      
+                print("Current value: "+i.split("=")[1].strip()+"\n")
+                break
+        temp.close()
+    '''
     
 def mainMenu():
     optionList=["1","2","3","4"]
@@ -130,14 +146,8 @@ def optionAdjust(index):
     print(Fore.LIGHTGREEN_EX + "----------------- [Settings] -----------------" + Style.RESET_ALL)
     optionListLanguages=["1","2","3"]
     if index == 1:
-        temp = open(absPath+"/config.conf", "r")
         print("[Languages]")
-        tempList=temp.readlines()
-        for i in tempList:
-            if i.startswith("language"):      
-                print("Current value: "+i.split("=")[1].strip()+"\n")
-                break
-        temp.close()
+        print("Current value: "+readCurrentValue(absPath+"/config.conf", "language")+"\n")
         print("1].English")
         print("2].中文(简体)\n")
         print("3].Back")
@@ -145,8 +155,10 @@ def optionAdjust(index):
         if option in optionListLanguages:
             if option == "1":
                 insertLines(absPath+"/config.conf", 0, "language=english")
+                settings()
             elif option == "2":
                 insertLines(absPath+"/config.conf", 0, "language=chinese")
+                settings()
             elif option == "3":
                 settings()
         else:
