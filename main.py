@@ -169,8 +169,7 @@ def optionAdjust(index):
             if option == "1":
                 insertLines(absPath+"/config.conf", 0, "language=english")
             elif option == "2":
-                temp = open(absPath+"/config.conf", "r+")
-                temp.close()
+                insertLines(absPath+"/config.conf", 0, "language=chinese")
             elif option == "3":
                 settings()
         else:
