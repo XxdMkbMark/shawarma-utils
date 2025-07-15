@@ -114,34 +114,11 @@ def settings():
     print("14].Back")
     option=optionInput("index")
     if option in optionList:
-        if option == "1":
-            optionAdjust(1)
-        elif option == "2":
-            optionAdjust(2)
-        elif option == "3":
-            optionAdjust(3)
-        elif option == "4":
-            optionAdjust(4)
-        elif option == "5":
-            optionAdjust(5)
-        elif option == "6":
-            optionAdjust(6)
-        elif option == "7":
-            optionAdjust(7)
-        elif option == "8":
-            optionAdjust(8)
-        elif option == "9":
-            optionAdjust(9)
-        elif option == "10":
-            optionAdjust(10)
-        elif option == "11":
-            optionAdjust(11)
-        elif option == "12":
-            optionAdjust(12)
-        elif option == "13":
-            optionAdjust(13)
-        elif option == "14":
-            mainMenu()
+        for i in optionList:
+            if option == i and i != "14":
+                optionAdjust(int(option))
+            elif i == "14":
+                mainMenu()
     else:
         log("error", "Invalid option")
         time.sleep(0.7)
@@ -203,7 +180,7 @@ def optionAdjust(index):
         pass
     else:
         log("error", "It seems like that this option doesn't exist. If you believe this is a bug, please report it on Github.")
-        time.sleep(0.7)
+        time.sleep(2)
         settings()
 
 def about():
