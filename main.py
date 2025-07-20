@@ -224,6 +224,7 @@ def optionAdjust(index):
             settings()
         option=optionInput("value")
         insertLines(absPath+"/config.conf", index-1, optionInFileName[index-2]+"="+option)
+        settings()
     
     else:
         log("error", "It seems like that this option doesn't exist. If you believe this is a bug, please report it on Github.")
