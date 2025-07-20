@@ -219,7 +219,7 @@ def optionAdjust(index):
             log("error", "Config file incorrect! Please refer to the example config file on Github and change your config file. Or delete this config file and restart the program to generate a new one.")
             settings()
         option=optionInput("value")
-        insertLines(absPath+"/config.conf", index-1, optionInFileName[index-2]+option)
+        insertLines(absPath+"/config.conf", index-1, optionInFileName[index-2]+"="+option)
     
     else:
         log("error", "It seems like that this option doesn't exist. If you believe this is a bug, please report it on Github.")
