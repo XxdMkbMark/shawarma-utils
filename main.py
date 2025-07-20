@@ -220,7 +220,7 @@ def optionAdjust(index):
         if currentValue != None: #配置文件读到None时的错误处理
             print("Current value: "+currentValue+"\n")
         else:
-            log("error", "Config file incorrect! Please refer to the example config file on Github and change your config file. Or delete this config file and restart the program to generate a new one.")
+            log("error", "Config file incorrect! Please refer to the example config file on Github and change your config file, or delete this config file and rerun the program to generate a new one.")
             settings()
         option=optionInput("value")
         insertLines(absPath+"/config.conf", index-1, optionInFileName[index-2]+"="+option)
