@@ -41,7 +41,7 @@ def optionInput(type):
         return value
     
 def printTitle():
-    print(Fore.LIGHTBLUE_EX + "        Shawarma Legend Utils - v1.0.6        " + Style.RESET_ALL)
+    print(Fore.LIGHTBLUE_EX + "        Shawarma Legend Utils - v1.0.7        " + Style.RESET_ALL)
     print("This is a utility for the game Shawarma Legend.")
 
 def insertLines(filename, line, content):
@@ -212,8 +212,12 @@ def optionAdjust(index):
 
     elif index >= 2 and index <= 11:
         print("["+optionDisplayName[index-2]+"]")
-        #print("Current value: "+readCurrentValue(absPath+"/config.conf", optionName[index-2])+"\n")
-        print(readCurrentValue(absPath+"/config.conf", optionInFileName[index-2]))
+        currentValue=readCurrentValue(absPath+"/config.conf", optionInFileName[index-2])
+        if currentValue != None: #配置文件读到None时的错误处理
+            print("Current value: "+currentValue+"\n")
+        else:
+            log("error", "Config file incorrect! Please refer to the example config file on Github and change your config file. Or delete this config file and restart the program to generate a new one.")
+            settings()
         option=optionInput("value")
         insertLines(absPath+"/config.conf", index-1, optionInFileName[index-2]+option)
     
@@ -227,7 +231,7 @@ def about():
     clearConsole()
     printTitle()
     print(Fore.LIGHTGREEN_EX + "------------------- [About] ------------------" + Style.RESET_ALL)
-    print("Version: 1.0.6")
+    print("Version: 1.0.7")
     print("Made by XxdMkb_Mark using Python")
     print("Github repository: https://github.com/XxdMkbMark/Shawarma-Legend-Utils \n")
     print("1].Back")
