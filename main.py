@@ -40,6 +40,10 @@ def optionInput(type):
         value=input(Fore.LIGHTCYAN_EX + "Enter a new value: " + Style.RESET_ALL)
         return value
     
+def autoCorrectConfigFile():
+    #TODO
+    pass
+
 def printTitle():
     print(Fore.LIGHTBLUE_EX + "        Shawarma Legend Utils - v1.0.7        " + Style.RESET_ALL)
     print("This is a utility for the game Shawarma Legend.")
