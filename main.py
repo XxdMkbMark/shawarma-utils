@@ -144,7 +144,8 @@ def optionAdjust(index):
     clearConsole()
     printTitle()
     print(Fore.LIGHTGREEN_EX + "----------------- [Settings] -----------------" + Style.RESET_ALL)
-    optionListLanguages=["1","2","3"]
+    optionList=["1","2","3"]
+    optionName=["Worker level", "Burrito Machine level", "Warpping Machine level", "Ingredients click count", "Grilling Pan level", "Cup level", "Soda Machine level", "Frier level", "Potato Slicer level", "Shawarma Slicer level"]
     if index == 1:
         print("[Languages]")
         print("Current value: "+readCurrentValue(absPath+"/config.conf", "language")+"\n")
@@ -152,7 +153,7 @@ def optionAdjust(index):
         print("2].中文(简体)\n")
         print("3].Back")
         option=optionInput("index")
-        if option in optionListLanguages:
+        if option in optionList:
             if option == "1":
                 insertLines(absPath+"/config.conf", 0, "language=english")
                 settings()
@@ -165,8 +166,29 @@ def optionAdjust(index):
             log("error", "Invalid option")
             time.sleep(0.7)
             optionAdjust(1)
-        
-    elif index == 2:
+
+    elif index == 12:
+        print("[Forth customer]")
+        print("Current value: "+readCurrentValue(absPath+"/config.conf", "forth-customer")+"\n")
+        print("1].Enabled")
+        print("2].Disabled\n")
+        print("3].Back")
+        option=optionInput("index")
+        if option in optionList:
+            if option == "1":
+                insertLines(absPath+"/config.conf", 0, "forth-customer=true")
+                settings()
+            elif option == "2":
+                insertLines(absPath+"/config.conf", 0, "forth-customer=false")
+                settings()
+            elif option == "3":
+                settings()
+        else:
+            log("error", "Invalid option")
+            time.sleep(0.7)
+            optionAdjust(12)
+
+    elif index >= 2 and index <= 11:
         print("[Worker level]")
         print("Current value: "+readCurrentValue(absPath+"/config.conf", "worker")+"\n")
         option=optionInput("value")
