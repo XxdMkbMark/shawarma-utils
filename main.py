@@ -145,7 +145,8 @@ def optionAdjust(index):
     printTitle()
     print(Fore.LIGHTGREEN_EX + "----------------- [Settings] -----------------" + Style.RESET_ALL)
     optionList=["1","2","3"]
-    optionName=["Worker level", "Burrito Machine level", "Warpping Machine level", "Ingredients click count", "Grilling Pan level", "Cup level", "Soda Machine level", "Frier level", "Potato Slicer level", "Shawarma Slicer level"]
+    optionDisplayName=["Worker level", "Burrito Machine level", "Warpping Machine level", "Ingredients click count", "Grilling Pan level", "Cup level", "Soda Machine level", "Frier level", "Potato Slicer level", "Shawarma Slicer level"]
+    optionInFileName=["worker", "burrito-machine", "warpping-machine", "ingredients-click-count", "grilling-pan", "cup", "soda-machine", "frier", "potato-slicer", "shawarma-slicer"]
     if index == 1:
         print("[Languages]")
         print("Current value: "+readCurrentValue(absPath+"/config.conf", "language")+"\n")
@@ -210,10 +211,11 @@ def optionAdjust(index):
             optionAdjust(13)
 
     elif index >= 2 and index <= 11:
-        print(optionName[index-2])
-        print("Current value: "+readCurrentValue(absPath+"/config.conf", optionName[index-2])+"\n")
+        print("["+optionDisplayName[index-2]+"]")
+        #print("Current value: "+readCurrentValue(absPath+"/config.conf", optionName[index-2])+"\n")
+        print(readCurrentValue(absPath+"/config.conf", optionInFileName[index-2]))
         option=optionInput("value")
-        insertLines(absPath+"/config.conf", index-1, optionName[index-2]+option)
+        insertLines(absPath+"/config.conf", index-1, optionInFileName[index-2]+option)
     
     else:
         log("error", "It seems like that this option doesn't exist. If you believe this is a bug, please report it on Github.")
