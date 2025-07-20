@@ -176,10 +176,10 @@ def optionAdjust(index):
         option=optionInput("index")
         if option in optionList:
             if option == "1":
-                insertLines(absPath+"/config.conf", 0, "forth-customer=true")
+                insertLines(absPath+"/config.conf", 11, "forth-customer=true")
                 settings()
             elif option == "2":
-                insertLines(absPath+"/config.conf", 0, "forth-customer=false")
+                insertLines(absPath+"/config.conf", 11, "forth-customer=false")
                 settings()
             elif option == "3":
                 settings()
@@ -188,33 +188,33 @@ def optionAdjust(index):
             time.sleep(0.7)
             optionAdjust(12)
 
-    elif index >= 2 and index <= 11:
-        print("[Worker level]")
-        print("Current value: "+readCurrentValue(absPath+"/config.conf", "worker")+"\n")
-        option=optionInput("value")
-        insertLines(absPath+"/config.conf", 1, "worker="+option)
-    elif index == 3:
-        pass
-    elif index == 4:
-        pass
-    elif index == 5:
-        pass
-    elif index == 6:
-        pass
-    elif index == 7:
-        pass
-    elif index == 8:
-        pass
-    elif index == 9:
-        pass
-    elif index == 10:
-        pass
-    elif index == 11:
-        pass
-    elif index == 12:
-        pass
     elif index == 13:
-        pass
+        print("[Ingredients customization]")
+        print("Current value: "+readCurrentValue(absPath+"/config.conf", "ingredients-customization")+"\n")
+        print("1].Enabled")
+        print("2].Disabled\n")
+        print("3].Back")
+        option=optionInput("index")
+        if option in optionList:
+            if option == "1":
+                insertLines(absPath+"/config.conf", 12, "ingredients-customization=true")
+                settings()
+            elif option == "2":
+                insertLines(absPath+"/config.conf", 12, "ingredients-customization=false")
+                settings()
+            elif option == "3":
+                settings()
+        else:
+            log("error", "Invalid option")
+            time.sleep(0.7)
+            optionAdjust(13)
+
+    elif index >= 2 and index <= 11:
+        print(optionName[index-2])
+        print("Current value: "+readCurrentValue(absPath+"/config.conf", optionName[index-2])+"\n")
+        option=optionInput("value")
+        insertLines(absPath+"/config.conf", index-1, optionName[index-2]+option)
+    
     else:
         log("error", "It seems like that this option doesn't exist. If you believe this is a bug, please report it on Github.")
         time.sleep(2)
