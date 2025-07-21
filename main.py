@@ -16,7 +16,7 @@ def init():
         log("warn", "Config file not found. Creating a new one...")
         time.sleep(1)
         temp=open(absPath+"\config.conf","w")
-        temp.write("language=english\nworker=1\nburrito-machine=1\nwarpping-machine=1\ningredients-click-count=1\ngrilling-pan=1\ncup=1\nsoda-machine=1\nfrier=1\npotato-slicer=1\nshawarma-slicer=1\nforth-customer=false\ningredients-customization=false")
+        temp.write("language=english\nworker=1\nburrito-machine=1\nwarpping-machine=1\ningredients-click-count=1\ngrilling-pan=1\ncup=1\nsoda-machine=1\nfrier=1\npotato-slicer=1\nshawarma-slicer=1\nforth-customer=false\ningredients-customization=false\nfirst-time-use=true")
         temp.close()
         if not os.path.exists(absPath+"/config.conf"):
             log("error", "Failed to create config file, please check if you have permissions to write into the folder.")
@@ -106,7 +106,8 @@ def mainMenu():
         time.sleep(0.7)
         mainMenu()
 def start():
-    pass
+    clearConsole()
+    printTitle()
 
 def settings():
     optionList=["1","2","3","4","5","6","7","8","9","10","11","12","13","14"]
