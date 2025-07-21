@@ -6,7 +6,7 @@ English | [中文(简体)](https://github.com/XxdMkbMark/shawarma-utils/blob/mai
 Simple program written using Python. </br>
 ## How to use:
 1. Download source code </br>
-   **WE DO NOT PROVIDE ANY KIND OF COMPILED EXECUTABLE RIGHT NOW** (maybe later) **, IF YOU NEED, DO IT YOURSELF.**
+   **WE DO NOT PROVIDE ANY KIND OF COMPILED EXECUTABLE RIGHT NOW** (maybe later) **, IF YOU NEED IT, DO IT YOURSELF.**
 2. Run `main.py`
 3. Follow the instruction
 4. Done!</br>
