@@ -42,6 +42,9 @@ def optionInput(type):
     elif type == "value":
         value=input(Fore.LIGHTCYAN_EX + "Enter a new value: " + Style.RESET_ALL)
         return value
+    elif type == "hotkey":
+        hotkey=input(Fore.LIGHTCYAN_EX + "Enter a new hotkey: " + Style.RESET_ALL)
+        return hotkey
     
 def autoCorrectConfigFile():
     #TODO
