@@ -1,0 +1,50 @@
+{
+    "title": "Shawarma Legend Utils - v",
+    "description": "This is a utility for the game Shawarma Legend.",
+    "menu_options": [
+        "Start",
+        "Settings",
+        "Quit",
+        "About"
+    ],
+    "settings_options": [
+        "Languages",
+        "Worker level",
+        "Burrito Machine level",
+        "Warpping Machine level",
+        "Ingredients click count",
+        "Grilling Pan level",
+        "Cup level",
+        "Soda Machine level",
+        "Frier level",
+        "Potato Slicer level",
+        "Shawarma Slicer level",
+        "Forth customer",
+        "Ingredients customization",
+        "Back"
+    ],
+    "prompts": {
+        "choose_option": "Choose an option: ",
+        "enter_value": "Enter a new value: ",
+        "enter_hotkey": "Enter a new hotkey: ",
+        "continue": "Continue? [y/n]"
+    },
+    "messages": {
+        "exiting": "Exiting...",
+        "invalid_option": "Invalid option",
+        "config_not_found": "Config file not found. Creating a new one...",
+        "config_error": "Failed to create config file, please check if you have permissions to write into the folder.",
+        "press_any_key": "Press any key to ",
+        "first_time_guide": "This guide will help you set hotkeys to control the game.",
+        "config_incorrect": "Config file incorrect! Please refer to the example config file on Github and change your config file, or delete this config file and rerun the program to generate a new one.",
+        "internal_error": "[Internal error: line number out of range, in func:insertLines] This is definitely a bug, if you are seeing this, please report this on Github immediately."
+    },
+    "language_options": [
+        "English",
+        "中文(简体)"
+    ],
+    "toggle_options": [
+        "Enabled",
+        "Disabled"
+    ]
+}

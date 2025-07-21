@@ -17,67 +17,17 @@ GITHUB_URL = "https://github.com/XxdMkbMark/Shawarma-Legend-Utils"
 
 # 玛德，你特么写一个切换语言结果，切换的语言的呢？？？？？？？？？？？？？？
 LANGUAGES = {
-    "english": {
-        "title": "Shawarma Legend Utils - v" + VERSION,
-        "description": "This is a utility for the game Shawarma Legend.",
-        "menu_options": ["Start", "Settings", "Quit", "About"],
-        "settings_options": [
-            "Languages", "Worker level", "Burrito Machine level", 
-            "Warpping Machine level", "Ingredients click count", 
-            "Grilling Pan level", "Cup level", "Soda Machine level", 
-            "Frier level", "Potato Slicer level", "Shawarma Slicer level",
-            "Forth customer", "Ingredients customization", "Back"
-        ],
-        "prompts": {
-            "choose_option": "Choose an option: ",
-            "enter_value": "Enter a new value: ",
-            "enter_hotkey": "Enter a new hotkey: ",
-            "continue": "Continue? [y/n]"
-        },
-        "messages": {
-            "exiting": "Exiting...",
-            "invalid_option": "Invalid option",
-            "config_not_found": "Config file not found. Creating a new one...",
-            "config_error": "Failed to create config file, please check if you have permissions to write into the folder.",
-            "press_any_key": "Press any key to ",
-            "first_time_guide": "This guide will help you set hotkeys to control the game.",
-            "config_incorrect": "Config file incorrect! Please refer to the example config file on Github and change your config file, or delete this config file and rerun the program to generate a new one.",
-            "internal_error": "[Internal error: line number out of range, in func:insertLines] This is definitely a bug, if you are seeing this, please report this on Github immediately."
-        },
-        "language_options": ["English", "中文(简体)"],
-        "toggle_options": ["Enabled", "Disabled"]
-    },
-    "chinese": {
-        "title": "Shawarma Legend 工具 - v" + VERSION,
-        "description": "这是一个为游戏 Shawarma Legend 设计的工具。",
-        "menu_options": ["开始", "设置", "退出", "关于"],
-        "settings_options": [
-            "语言", "工人等级", "卷饼机等级", 
-            "包装机等级", "配料点击次数", 
-            "烤盘等级", "杯子等级", "饮料机等级", 
-            "炸锅等级", "土豆切片机等级", "烤肉切片机等级",
-            "第四位顾客", "配料自定义", "返回"
-        ],
-        "prompts": {
-            "choose_option": "选择选项: ",
-            "enter_value": "输入新值: ",
-            "enter_hotkey": "输入新快捷键: ",
-            "continue": "继续? [y/n]"
-        },
-        "messages": {
-            "exiting": "正在退出...",
-            "invalid_option": "无效选项",
-            "config_not_found": "配置文件未找到。正在创建新的配置文件...",
-            "config_error": "创建配置文件失败，请检查是否有写入文件夹的权限。",
-            "press_any_key": "按任意键",
-            "first_time_guide": "本向导将帮助您设置控制游戏的快捷键。",
-            "config_incorrect": "配置文件不正确！请参考Github上的示例配置文件修改您的配置文件，或删除此配置文件并重新运行程序以生成新的配置文件。",
-            "internal_error": "[内部错误: 行号超出范围，在函数:insertLines中] 这绝对是一个错误，如果您看到此消息，请立即在Github上报告。"
-        },
-        "language_options": ["English", "中文(简体)"],
-        "toggle_options": ["启用", "禁用"]
-    }
+    "english": None,
+    "chinese": None
 }
+
+files = ["locales/en.json","locales/zh.json"]
+
+if all(os.path.exists(f) for f in files):
+    print("Translation file already exists. Skip downloading.")
+else:
+    print("The localization file does not exist. The localization file on the server is about to be downloaded.")
+    
 
 
 current_language = "english"
