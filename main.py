@@ -107,7 +107,10 @@ def mainMenu():
         mainMenu()
 def start():
     clearConsole()
-    printTitle()
+    flag=readCurrentValue(absPath+"/config.conf", "first-time-use")
+    if flag == "true":
+        printTitle()
+        print(Fore.LIGHTGREEN_EX + "----------- [First time use guide] -----------" + Style.RESET_ALL)
 
 def settings():
     optionList=["1","2","3","4","5","6","7","8","9","10","11","12","13","14"]
