@@ -3,4 +3,5 @@
 --------------------------------------
 [English](https://github.com/XxdMkbMark/shawarma-utils) | 中文(简体) </br>
 </br>
+用Python写的一个简易小程序</br>
 如果脚本自动生成配置文件时遇到了问题，你可以试试下载上方的配置文件示例([config.conf](https://raw.githubusercontent.com/XxdMkbMark/shawarma-utils/main/config.conf))然后把它放到文件夹里
