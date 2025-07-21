@@ -103,8 +103,18 @@ def start():
     clearConsole()
     flag=readCurrentValue(absPath+"/config.conf", "first-time-use")
     if flag == "true":
-        printTitle()
-        print(Fore.LIGHTGREEN_EX + "----------- [First time use guide] -----------" + Style.RESET_ALL)
+        firstTimeUseGuide()
+
+def firstTimeUseGuide():
+    clearConsole()
+    printTitle()
+    print(Fore.LIGHTGREEN_EX + "----------- [First time use guide] -----------" + Style.RESET_ALL)
+    print("This guide will help you set hotkeys to control the game.")
+    print("Continue? [y/n]")
+    option=optionInput("value")
+    if option != "y":
+        mainMenu()
+    
 
 def settings():
     optionList=["1","2","3","4","5","6","7","8","9","10","11","12","13","14"]
