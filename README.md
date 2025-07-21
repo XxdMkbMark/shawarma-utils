@@ -14,7 +14,7 @@ Simple program written using Python. </br>
 
 ## Q&A
 ### Common questions:
-<h4>Q: I can't run the program.
+<h4>Q: I can't run the program.</h4></br>
 A: Make sure you've installed python3.10/3.11 and those libraries in the requirement.txt above. </br>
 </br>
 Q: It says "Failed to create config file" when I run the program for the first time. </br>
