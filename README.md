@@ -15,7 +15,7 @@ Simple program written using Python.
 
 ## Q&A
 
-### Common questions
+### Common questions:
 
 **Q:** I can't run the program.  
 **A:** Make sure you've installed Python 3.10/3.11 and the libraries listed in [`requirements.txt`](https://raw.githubusercontent.com/XxdMkbMark/shawarma-utils/main/requirements.txt).
