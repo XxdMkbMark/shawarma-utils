@@ -73,15 +73,6 @@ def readCurrentValue(filename, option): #只用于设置读取当前值！不要
         for i in lines:
             if i.startswith(option):
                 return i.split("=")[1].strip()
-    '''
-    temp = open(absPath+"/config.conf", "r")
-        tempList=temp.readlines()
-        for i in tempList:
-            if i.startswith("language"):      
-                print("Current value: "+i.split("=")[1].strip()+"\n")
-                break
-        temp.close()
-    '''
     
 def mainMenu():
     optionList=["1","2","3","4"]
