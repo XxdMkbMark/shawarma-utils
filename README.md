@@ -6,6 +6,8 @@ A utility for the game Shawarma Legend. Simple program written using Python.
 
 ## How to use
 
+**Requirement:** Python 3.10/3.11, libraries in [`requirements.txt`](https://raw.githubusercontent.com/XxdMkbMark/shawarma-utils/main/requirements.txt), macOS/Microsoft Windows 7 and higher(lower than this might work, but we do not provide any support to them)/Most Linux distributions(we only provide support to Ubuntu 20.04+ and Debian 11+)
+
 1. Download source code  
    **WE DO NOT PROVIDE ANY KIND OF COMPILED EXECUTABLE RIGHT NOW** (maybe later). **IF YOU NEED IT, DO IT YOURSELF.**
 2. Run `main.py`
