@@ -26,4 +26,4 @@ A utility for the game Shawarma Legend. Simple program written using Python.
 
 ### Met more problems?
 
-Feel free to create an issue!
+Feel free to create an [issue](https://github.com/XxdMkbMark/shawarma-utils/issues)!
