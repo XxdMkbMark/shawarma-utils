@@ -1,202 +1,396 @@
-import os, sys, time, msvcrt, pyautogui, keyboard
+import os
+import sys
+import time
+import msvcrt
+import pyautogui
+import keyboard
 from colorama import Fore, Back, Style, just_fix_windows_console
+
+
 just_fix_windows_console()
 print(Style.RESET_ALL)
 
+CONFIG_FILE = "config.conf"
+HOTKEY_FILE = "hotkey.conf"
+VERSION = "1.0.7"
+GITHUB_URL = "https://github.com/XxdMkbMark/Shawarma-Legend-Utils"
+
+# 玛德，你特么写一个切换语言结果，切换的语言的呢？？？？？？？？？？？？？？
+LANGUAGES = {
+    "english": {
+        "title": "Shawarma Legend Utils - v" + VERSION,
+        "description": "This is a utility for the game Shawarma Legend.",
+        "menu_options": ["Start", "Settings", "Quit", "About"],
+        "settings_options": [
+            "Languages", "Worker level", "Burrito Machine level", 
+            "Warpping Machine level", "Ingredients click count", 
+            "Grilling Pan level", "Cup level", "Soda Machine level", 
+            "Frier level", "Potato Slicer level", "Shawarma Slicer level",
+            "Forth customer", "Ingredients customization", "Back"
+        ],
+        "prompts": {
+            "choose_option": "Choose an option: ",
+            "enter_value": "Enter a new value: ",
+            "enter_hotkey": "Enter a new hotkey: ",
+            "continue": "Continue? [y/n]"
+        },
+        "messages": {
+            "exiting": "Exiting...",
+            "invalid_option": "Invalid option",
+            "config_not_found": "Config file not found. Creating a new one...",
+            "config_error": "Failed to create config file, please check if you have permissions to write into the folder.",
+            "press_any_key": "Press any key to ",
+            "first_time_guide": "This guide will help you set hotkeys to control the game.",
+            "config_incorrect": "Config file incorrect! Please refer to the example config file on Github and change your config file, or delete this config file and rerun the program to generate a new one.",
+            "internal_error": "[Internal error: line number out of range, in func:insertLines] This is definitely a bug, if you are seeing this, please report this on Github immediately."
+        },
+        "language_options": ["English", "中文(简体)"],
+        "toggle_options": ["Enabled", "Disabled"]
+    },
+    "chinese": {
+        "title": "Shawarma Legend 工具 - v" + VERSION,
+        "description": "这是一个为游戏 Shawarma Legend 设计的工具。",
+        "menu_options": ["开始", "设置", "退出", "关于"],
+        "settings_options": [
+            "语言", "工人等级", "卷饼机等级", 
+            "包装机等级", "配料点击次数", 
+            "烤盘等级", "杯子等级", "饮料机等级", 
+            "炸锅等级", "土豆切片机等级", "烤肉切片机等级",
+            "第四位顾客", "配料自定义", "返回"
+        ],
+        "prompts": {
+            "choose_option": "选择选项: ",
+            "enter_value": "输入新值: ",
+            "enter_hotkey": "输入新快捷键: ",
+            "continue": "继续? [y/n]"
+        },
+        "messages": {
+            "exiting": "正在退出...",
+            "invalid_option": "无效选项",
+            "config_not_found": "配置文件未找到。正在创建新的配置文件...",
+            "config_error": "创建配置文件失败，请检查是否有写入文件夹的权限。",
+            "press_any_key": "按任意键",
+            "first_time_guide": "本向导将帮助您设置控制游戏的快捷键。",
+            "config_incorrect": "配置文件不正确！请参考Github上的示例配置文件修改您的配置文件，或删除此配置文件并重新运行程序以生成新的配置文件。",
+            "internal_error": "[内部错误: 行号超出范围，在函数:insertLines中] 这绝对是一个错误，如果您看到此消息，请立即在Github上报告。"
+        },
+        "language_options": ["English", "中文(简体)"],
+        "toggle_options": ["启用", "禁用"]
+    }
+}
+
+
+current_language = "english"
+absPath = os.getcwd()
+
+def get_translation(key):
+    """Get translated string for current language"""
+    return LANGUAGES[current_language].get(key, key)
+
 def clearConsole():
+    """Clear the console screen"""
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def log(status, message):
-    color = {"info": Back.BLUE, "warn": Back.YELLOW, "error": Back.RED}.get(status, "")
-    tag = f"[{status.upper():^5}]"
-    print(color + tag + Style.RESET_ALL + " " + message)
+    """Log messages with different status levels"""
+    status_colors = {
+        "info": Back.BLUE,
+        "warn": Back.YELLOW,
+        "error": Back.RED
+    }
+    print(status_colors.get(status, "") + f"[{status.upper()}]" + Style.RESET_ALL + " " + message)
 
-def optionInput(type):
-    if type == "index":
-        return input(Fore.LIGHTCYAN_EX + "Choose an option: " + Style.RESET_ALL)
-    elif type == "value":
-        return input(Fore.LIGHTCYAN_EX + "Enter a new value: " + Style.RESET_ALL)
-    elif type == "hotkey":
-        return input(Fore.LIGHTCYAN_EX + "Enter a new hotkey: " + Style.RESET_ALL)
-
-def set_config_value(filename, key, value):
-    updated = False
-    lines = []
-    if os.path.exists(filename):
-        with open(filename, 'r') as f:
-            for line in f:
-                if line.startswith(key + "="):
-                    lines.append(f"{key}={value}\n")
-                    updated = True
-                else:
-                    lines.append(line)
-    if not updated:
-        lines.append(f"{key}={value}\n")
-    with open(filename, 'w') as f:
-        f.writelines(lines)
-
-def get_config_value(filename, key):
-    if not os.path.exists(filename):
-        return None
-    with open(filename, 'r') as f:
-        for line in f:
-            if line.startswith(key + "="):
-                return line.strip().split("=", 1)[1]
-    return None
-
-def printTitle():
-    print(Fore.LIGHTBLUE_EX + "        Shawarma Legend Utils - v1.0.7        " + Style.RESET_ALL)
-    print("This is a utility for the game Shawarma Legend.")
+def optionInput(input_type):
+    """Get user input with appropriate prompt"""
+    prompts = {
+        "index": get_translation("prompts")["choose_option"],
+        "value": get_translation("prompts")["enter_value"],
+        "hotkey": get_translation("prompts")["enter_hotkey"]
+    }
+    return input(Fore.LIGHTCYAN_EX + prompts.get(input_type, "") + Style.RESET_ALL)
 
 def init():
+    """Initialize the application"""
     clearConsole()
-    global absPath
+    global absPath, current_language
     absPath = os.getcwd()
-    config_path = os.path.join(absPath, "config.conf")
-    hotkey_path = os.path.join(absPath, "hotkey.conf")
-    if not os.path.exists(config_path):
-        log("warn", "Config file not found. Creating a new one...")
+    
+    
+    if not os.path.exists(os.path.join(absPath, CONFIG_FILE)):
+        log("warn", get_translation("messages")["config_not_found"])
         time.sleep(1)
-        default_config = {
-            "language": "english",
-            "worker": "1",
-            "burrito-machine": "1",
-            "warpping-machine": "1",
-            "ingredients-click-count": "1",
-            "grilling-pan": "1",
-            "cup": "1",
-            "soda-machine": "1",
-            "frier": "1",
-            "potato-slicer": "1",
-            "shawarma-slicer": "1",
-            "forth-customer": "false",
-            "ingredients-customization": "false",
-            "first-time-use": "true"
-        }
-        with open(config_path, 'w') as f:
-            for k, v in default_config.items():
-                f.write(f"{k}={v}\n")
-    if not os.path.exists(hotkey_path):
-        with open(hotkey_path, 'w') as f:
-            f.write("# hotkeys will be configured here\n")
+        
+        default_config = [
+            "language=english",
+            "worker=1",
+            "burrito-machine=1",
+            "warpping-machine=1",
+            "ingredients-click-count=1",
+            "grilling-pan=1",
+            "cup=1",
+            "soda-machine=1",
+            "frier=1",
+            "potato-slicer=1",
+            "shawarma-slicer=1",
+            "forth-customer=false",
+            "ingredients-customization=false",
+            "first-time-use=true"
+        ]
+        
+        try:
+            with open(os.path.join(absPath, CONFIG_FILE), "w") as f:
+                f.write("\n".join(default_config))
+            
+           
+            with open(os.path.join(absPath, HOTKEY_FILE), "w") as f:
+                pass
+                
+            if not os.path.exists(os.path.join(absPath, CONFIG_FILE)):
+                raise IOError("Config file creation failed")
+                
+        except Exception as e:
+            log("error", get_translation("messages")["config_error"])
+            print(get_translation("messages")["press_any_key"] + "quit...")
+            msvcrt.getch()
+            sys.exit(1)
+    
+    
+    lang = readCurrentValue(CONFIG_FILE, "language")
+    if lang in LANGUAGES:
+        current_language = lang
 
-def firstTimeUseGuide():
-    clearConsole()
-    printTitle()
-    print(Fore.LIGHTGREEN_EX + "----------- [First time use guide] -----------" + Style.RESET_ALL)
-    print("This guide will help you set hotkeys to control the game.")
-    print("Continue? [y/n]")
-    option = optionInput("index")
-    if option != "y":
-        mainMenu()
+def readCurrentValue(filename, option):
+    """Read a value from config file"""
+    filepath = os.path.join(absPath, filename)
+    try:
+        with open(filepath, 'r') as f:
+            for line in f:
+                if line.startswith(option):
+                    return line.split("=")[1].strip()
+    except FileNotFoundError:
+        return None
+
+def insertLines(filename, line_number, content):
+    """Insert or replace a line in a file"""
+    filepath = os.path.join(absPath, filename)
+    try:
+        with open(filepath, 'r') as f:
+            lines = f.readlines()
+        
+        if 0 <= line_number < len(lines):
+            lines[line_number] = content + '\n'
+        else:
+            log("error", get_translation("messages")["internal_error"])
+            time.sleep(1)
+            sys.exit(1)
+            
+        with open(filepath, 'w') as f:
+            f.writelines(lines)
+    except Exception as e:
+        log("error", f"Error modifying file: {str(e)}")
+
+def printTitle():
+    """Print the application title"""
+    print(Fore.LIGHTBLUE_EX + f"        {get_translation('title')}        " + Style.RESET_ALL)
+    print(get_translation("description"))
+
+def mainMenu():
+    """Display the main menu"""
+    while True:
+        clearConsole()
+        printTitle()
+        print(Fore.LIGHTGREEN_EX + "----------------- [Main Menu] ----------------" + Style.RESET_ALL)
+        
+        for i, option in enumerate(get_translation("menu_options"), 1):
+            print(f"{i}]. {option}")
+        
+        option = optionInput("index")
+        
+        if option == "1":
+            start()
+        elif option == "2":
+            settings()
+        elif option == "3":
+            log("info", get_translation("messages")["exiting"])
+            time.sleep(0.4)
+            sys.exit(0)
+        elif option == "4":
+            about()
+        else:
+            log("error", get_translation("messages")["invalid_option"])
+            time.sleep(0.7)
 
 def start():
+    """Start the main functionality"""
     clearConsole()
-    flag = get_config_value(absPath + "/config.conf", "first-time-use")
+    flag = readCurrentValue(CONFIG_FILE, "first-time-use")
     if flag == "true":
         firstTimeUseGuide()
 
-def about():
+def firstTimeUseGuide():
+    """Guide for first-time users"""
     clearConsole()
     printTitle()
-    print(Fore.LIGHTGREEN_EX + "------------------- [About] ------------------" + Style.RESET_ALL)
-    print("Version: 1.0.7")
-    print("Made by XxdMkb_Mark using Python")
-    print("Github repository: https://github.com/XxdMkbMark/Shawarma-Legend-Utils \n")
-    print("1].Back")
-    if optionInput("index") == "1":
+    print(Fore.LIGHTGREEN_EX + "----------- [First time use guide] -----------" + Style.RESET_ALL)
+    print(get_translation("messages")["first_time_guide"])
+    print(get_translation("prompts")["continue"])
+    
+    option = optionInput("index")
+    if option.lower() != 'y':
         mainMenu()
-    else:
-        log("error", "Invalid option")
-        time.sleep(0.7)
-        about()
-
-settings_list = [
-    ("language", "Languages", ["english", "chinese"]),
-    ("worker", "Worker level"),
-    ("burrito-machine", "Burrito Machine level"),
-    ("warpping-machine", "Warpping Machine level"),
-    ("ingredients-click-count", "Ingredients click count"),
-    ("grilling-pan", "Grilling Pan level"),
-    ("cup", "Cup level"),
-    ("soda-machine", "Soda Machine level"),
-    ("frier", "Frier level"),
-    ("potato-slicer", "Potato Slicer level"),
-    ("shawarma-slicer", "Shawarma Slicer level"),
-    ("forth-customer", "Forth customer", ["true", "false"]),
-    ("ingredients-customization", "Ingredients customization", ["true", "false"])
-]
+    
 
 def settings():
-    clearConsole()
-    printTitle()
-    print(Fore.LIGHTGREEN_EX + "----------------- [Settings] -----------------" + Style.RESET_ALL)
-    for i, (_, name, *_) in enumerate(settings_list, start=1):
-        print(f"{i}].{name}")
-    print(f"{len(settings_list)+1}].Back")
-    option = optionInput("index")
-    try:
-        index = int(option)
-        if 1 <= index <= len(settings_list):
-            optionAdjust(index - 1)
-        elif index == len(settings_list) + 1:
-            mainMenu()
-        else:
-            raise ValueError
-    except ValueError:
-        log("error", "Invalid option")
-        time.sleep(0.7)
-        settings()
+    """Display and handle settings menu"""
+    while True:
+        clearConsole()
+        if not os.path.exists(os.path.join(absPath, CONFIG_FILE)):
+            log("error", get_translation("messages")["config_not_found"])
+            print(get_translation("messages")["press_any_key"] + "continue...")
+            msvcrt.getch()
+            return mainMenu()
+            
+        printTitle()
+        print(Fore.LIGHTGREEN_EX + "----------------- [Settings] -----------------" + Style.RESET_ALL)
+        
+        for i, option in enumerate(get_translation("settings_options"), 1):
+            print(f"{i}]. {option}")
+        
+        option = optionInput("index")
+        
+        try:
+            option_num = int(option)
+            if 1 <= option_num <= 13:
+                optionAdjust(option_num)
+            elif option_num == 14:
+                return mainMenu()
+            else:
+                log("error", get_translation("messages")["invalid_option"])
+                time.sleep(0.7)
+        except ValueError:
+            log("error", get_translation("messages")["invalid_option"])
+            time.sleep(0.7)
 
 def optionAdjust(index):
-    clearConsole()
-    printTitle()
-    key, label, *values = settings_list[index]
-    current = get_config_value(absPath + "/config.conf", key)
-    print(f"[{label}]\nCurrent value: {current if current else '(undefined)'}\n")
-    if values:
-        for i, v in enumerate(values[0], start=1):
-            print(f"{i}].{v.capitalize()}")
-        print(f"{len(values[0])+1}].Back")
+    """Adjust specific settings"""
+    while True:
+        clearConsole()
+        printTitle()
+        print(Fore.LIGHTGREEN_EX + "----------------- [Settings] -----------------" + Style.RESET_ALL)
+        
+        if index == 1:  
+            print(f"[{get_translation('settings_options')[0]}]")
+            print(f"Current value: {readCurrentValue(CONFIG_FILE, 'language')}\n")
+            
+            for i, lang in enumerate(get_translation("language_options"), 1):
+                print(f"{i}]. {lang}")
+            print(f"\n{len(get_translation('language_options')) + 1}]. Back")
+            
+            option = optionInput("index")
+            
+            if option == "1":
+                insertLines(CONFIG_FILE, 0, "language=english")
+                global current_language
+                current_language = "english"
+                return
+            elif option == "2":
+                insertLines(CONFIG_FILE, 0, "language=chinese")
+                current_language = "chinese"
+                return
+            elif option == "3":
+                return
+            else:
+                log("error", get_translation("messages")["invalid_option"])
+                time.sleep(0.7)
+                
+        elif index == 12:  
+            print(f"[{get_translation('settings_options')[11]}]")
+            print(f"Current value: {readCurrentValue(CONFIG_FILE, 'forth-customer')}\n")
+            
+            for i, opt in enumerate(get_translation("toggle_options"), 1):
+                print(f"{i}]. {opt}")
+            print(f"\n{len(get_translation('toggle_options')) + 1}]. Back")
+            
+            option = optionInput("index")
+            
+            if option == "1":
+                insertLines(CONFIG_FILE, 11, "forth-customer=true")
+                return
+            elif option == "2":
+                insertLines(CONFIG_FILE, 11, "forth-customer=false")
+                return
+            elif option == "3":
+                return
+            else:
+                log("error", get_translation("messages")["invalid_option"])
+                time.sleep(0.7)
+                
+        elif index == 13:  
+            print(f"[{get_translation('settings_options')[12]}]")
+            print(f"Current value: {readCurrentValue(CONFIG_FILE, 'ingredients-customization')}\n")
+            
+            for i, opt in enumerate(get_translation("toggle_options"), 1):
+                print(f"{i}]. {opt}")
+            print(f"\n{len(get_translation('toggle_options')) + 1}]. Back")
+            
+            option = optionInput("index")
+            
+            if option == "1":
+                insertLines(CONFIG_FILE, 12, "ingredients-customization=true")
+                return
+            elif option == "2":
+                insertLines(CONFIG_FILE, 12, "ingredients-customization=false")
+                return
+            elif option == "3":
+                return
+            else:
+                log("error", get_translation("messages")["invalid_option"])
+                time.sleep(0.7)
+                
+        elif 2 <= index <= 11:  
+            option_names = [
+                "worker", "burrito-machine", "warpping-machine", 
+                "ingredients-click-count", "grilling-pan", "cup", 
+                "soda-machine", "frier", "potato-slicer", "shawarma-slicer"
+            ]
+            option_key = option_names[index-2]
+            
+            current_value = readCurrentValue(CONFIG_FILE, option_key)
+            if current_value is None:
+                log("error", get_translation("messages")["config_incorrect"])
+                return settings()
+                
+            print(f"[{get_translation('settings_options')[index-1]}]")
+            print(f"Current value: {current_value}\n")
+            
+            new_value = optionInput("value")
+            insertLines(CONFIG_FILE, index-1, f"{option_key}={new_value}")
+            return
+        else:
+            log("error", "It seems like that this option doesn't exist. If you believe this is a bug, please report it on Github.")
+            time.sleep(2)
+            return settings()
+
+def about():
+    """Display about information"""
+    while True:
+        clearConsole()
+        printTitle()
+        print(Fore.LIGHTGREEN_EX + "------------------- [About] ------------------" + Style.RESET_ALL)
+        print(f"Version: {VERSION}")
+        print("Made by XxdMkb_Mark using Python")
+        print(f"Github repository: {GITHUB_URL}\n")
+        print("1]. Back")
+        
         option = optionInput("index")
-        try:
-            i = int(option)
-            if 1 <= i <= len(values[0]):
-                set_config_value(absPath + "/config.conf", key, values[0][i - 1])
-            settings()
-        except ValueError:
-            log("error", "Invalid option")
+        if option == "1":
+            return mainMenu()
+        else:
+            log("error", get_translation("messages")["invalid_option"])
             time.sleep(0.7)
-            optionAdjust(index)
-    else:
-        new_value = optionInput("value")
-        set_config_value(absPath + "/config.conf", key, new_value)
-        settings()
 
-def mainMenu():
-    clearConsole()
-    printTitle()
-    print(Fore.LIGHTGREEN_EX + "----------------- [Main Menu] ----------------" + Style.RESET_ALL)
-    print("1].Start")
-    print("2].Settings")
-    print("3].Quit")
-    print("4].About")
-    option = optionInput("index")
-    if option == "1":
-        start()
-    elif option == "2":
-        settings()
-    elif option == "3":
-        log("info", "Exiting...")
-        time.sleep(0.4)
-        sys.exit(0)
-    elif option == "4":
-        about()
-    else:
-        log("error", "Invalid option")
-        time.sleep(0.7)
-        mainMenu()
 
-init()
-time.sleep(0.5)
-mainMenu()
+if __name__ == "__main__":
+    init()
+    time.sleep(0.5)
+    mainMenu()
