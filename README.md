@@ -10,7 +10,6 @@ Simple program written using Python. </br>
 2. Run `main.py`
 3. Follow the instruction
 4. Done!</br>
-</br>
 
 <h2>Q&A</h2>
 <h3>Common questions:</h3>
