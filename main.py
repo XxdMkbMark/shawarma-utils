@@ -114,7 +114,7 @@ def firstTimeUseGuide():
     print(Fore.LIGHTGREEN_EX + "----------- [First time use guide] -----------" + Style.RESET_ALL)
     print("This guide will help you set hotkeys to control the game.")
     print("Continue? [y/n]")
-    option=optionInput("value")
+    option=optionInput("index")
     if option != "y":
         mainMenu()
     
