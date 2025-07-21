@@ -19,7 +19,7 @@ def init():
         temp.write("language=english\nworker=1\nburrito-machine=1\nwarpping-machine=1\ningredients-click-count=1\ngrilling-pan=1\ncup=1\nsoda-machine=1\nfrier=1\npotato-slicer=1\nshawarma-slicer=1\nforth-customer=false\ningredients-customization=false")
         temp.close()
         if not os.path.exists(absPath+"/config.conf"):
-            log("error", "Failed to create config file, please check if you have premissions to write into the folder.")
+            log("error", "Failed to create config file, please check if you have permissions to write into the folder.")
             print("Press any key to quit...")
             msvcrt.getch()
             sys.exit(1)
@@ -57,7 +57,7 @@ def insertLines(filename, line, content):
         del lines[line]
         lines.insert(line, content + '\n')
     else:
-        log("error", "[Internal error: line number out of range, in func:insertLines.] This is definitely a bug, if you are seeing this, please report this on Github immediately.")
+        log("error", "[Internal error: line number out of range, in func:insertLines] This is definitely a bug, if you are seeing this, please report this on Github immediately.")
         time.sleep(1)
         sys.exit(1)
     #写行
