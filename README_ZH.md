@@ -8,7 +8,7 @@
 
 **要求:** Python 3.10/3.11, [`requirements.txt`](https://raw.githubusercontent.com/XxdMkbMark/shawarma-utils/main/requirements.txt) 中的库, macOS/Microsoft Windows 7或更高(低于Windows 7的版本也许能运行，但是我们不对其提供支持)/大部分的Linux发行版(只对Ubuntu 20.04+和Debian 11+提供支持)
 
-1. 下载源代码
+1. 下载源代码\
    **我们暂时不提供任何编译好的可执行文件** (以后也许会)， **如果你需要，请自己编译**
 2. 运行 `main.py`
 3. 跟随程序里的指引
