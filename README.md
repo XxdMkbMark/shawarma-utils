@@ -18,7 +18,7 @@ Simple program written using Python.
 ### Common questions
 
 **Q:** I can't run the program.  
-**A:** Make sure you've installed Python 3.10/3.11 and the libraries listed in `requirements.txt`.
+**A:** Make sure you've installed Python 3.10/3.11 and the libraries listed in [`requirements.txt`](https://github.com/XxdMkbMark/).
 
 **Q:** It says "Failed to create config file" when I run the program for the first time.  
 **A:** Check if you have permission to write to the folder. If this error still exists, you can download the example config file [`config.conf`](https://raw.githubusercontent.com/XxdMkbMark/shawarma-utils/main/config.conf) and put it into the folder.
