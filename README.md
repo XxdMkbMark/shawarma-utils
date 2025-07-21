@@ -1,9 +1,10 @@
 # shawarma-utils
 A utility for the game Shawarma Legend.
 
-[English](#) | [中文(简体)](https://github.com/XxdMkbMark/shawarma-utils/blob/main/README_ZH.md)
-
 Simple program written using Python.
+
+---
+[English](#) | [中文(简体)](https://github.com/XxdMkbMark/shawarma-utils/blob/main/README_ZH.md)
 
 ## How to use
 
