@@ -1,4 +1,4 @@
-import os,sys,time,msvcrt
+import os,sys,time,msvcrt,pyautogui
 from colorama import Fore, Back, Style, just_fix_windows_console
 just_fix_windows_console()
 print(Style.RESET_ALL)
