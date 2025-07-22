@@ -16,10 +16,10 @@ def init():
         log("warn", "Config file not found. Creating a new one...")
         time.sleep(1)
         temp=open(absPath+"/config/in-game.conf","w")
-        temp.write("language=english\nworker=1\nburrito-machine=1\nwarpping-machine=1\ningredients-click-count=1\ngrilling-pan=1\ncup=1\nsoda-machine=1\nfrier=1\npotato-slicer=1\nshawarma-slicer=1\nforth-customer=false\ningredients-customization=false\nfirst-time-use=true")
+        temp.write("language=english\nworker=1\nburrito-machine=1\nwarpping-machine=1\ningredients-click-count=1\ngrilling-pan=1\ncup=1\nsoda-machine=1\nfrier=1\npotato-slicer=1\nshawarma-slicer=1\nforth-customer=false\ningredients-customization=false")
         temp.close()
         temp=open(absPath+"/config/hotkey.conf","w")
-        temp.write("pickle-sauce-juice-etc=undefined\n")
+        temp.write("first-time-use=true\npickle-sauce-juice-etc=undefined\n")
         temp.close()
         if not os.path.exists(absPath+"/config/in-game.conf"):
             log("error", "Failed to create config file, please check if you have permissions to write into the folder.")
