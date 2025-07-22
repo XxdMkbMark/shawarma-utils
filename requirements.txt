@@ -1,3 +1,5 @@
-colorama==0.4.6
-keyboard==0.13.5
-pyautogui==0.9.54
+getch
+pyautogui
+keyboard
+requests
+colorama
