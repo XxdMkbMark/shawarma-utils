@@ -1,10 +1,13 @@
 import os
 import sys
+import getch
 import time
-import msvcrt
+# import msvcrt
 import pyautogui
 import keyboard
+import requests
 from colorama import Fore, Back, Style, just_fix_windows_console
+import json
 
 
 just_fix_windows_console()
@@ -23,10 +26,35 @@ LANGUAGES = {
 
 files = ["locales/en.json","locales/zh.json"]
 
-if all(os.path.exists(f) for f in files):
-    print("Translation file already exists. Skip downloading.")
-else:
-    print("The localization file does not exist. The localization file on the server is about to be downloaded.")
+
+url = None
+local_path = None
+
+
+for f in files:
+    if os.path.exists(f):
+        print(Fore.YELLOW + f"Translation file {f} is already exists. Skip downloading.")
+    else:
+        print(Fore.YELLOW + f"The localization file does not exist ({f}). The localization file on the server is about to be downloaded.")
+        response = requests.get(f"https://file.ec3.pdnode.com/suf/{f}")
+        if (response.status_code == 200):
+            print(Fore.GREEN + f"Download Success ({f})")
+            try:
+                with open(f"./{f}", "wb") as fw:
+                    fw.write(response.content)
+            except Exception:
+                print(Fore.RED + f"An error occurred while writing the file, please contact the author. ({f})")
+        else:
+            print(Fore.RED + f"Download ERROR ({f})")
+            print(Fore.RED + f"Please try going to https://file.ec3.pdnode.com/suf/{f}  or download on github")
+            exit()
+    print(Fore.YELLOW + "Read the internationalization file (this process may be slow, please be patient.)")
+    with open(f, "r", encoding="utf-8") as file_obj:
+        if f == "locales/en.json":
+            LANGUAGES["english"] = json.load(file_obj)
+        elif f == "locales/zh.json":
+            LANGUAGES["chinese"] = json.load(file_obj)
+
     
 
 
@@ -101,7 +129,8 @@ def init():
         except Exception as e:
             log("error", get_translation("messages")["config_error"])
             print(get_translation("messages")["press_any_key"] + "quit...")
-            msvcrt.getch()
+            getch.getch()
+
             sys.exit(1)
     
     
@@ -197,7 +226,8 @@ def settings():
         if not os.path.exists(os.path.join(absPath, CONFIG_FILE)):
             log("error", get_translation("messages")["config_not_found"])
             print(get_translation("messages")["press_any_key"] + "continue...")
-            msvcrt.getch()
+            getch.getch()
+
             return mainMenu()
             
         printTitle()
