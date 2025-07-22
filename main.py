@@ -21,7 +21,7 @@ def init():
     if os.path.exists(inGamePath):
         pass
     else:
-        log("warn", "Config file not found. Creating a new one...")
+        log("warn", "Config file not found. Creating new ones...")
         time.sleep(1)
         temp=open(inGamePath,"w")
         temp.write("language=english\nworker=1\nburrito-machine=1\nwarpping-machine=1\ningredients-click-count=1\ngrilling-pan=1\ncup=1\nsoda-machine=1\nfrier=1\npotato-slicer=1\nshawarma-slicer=1\nforth-customer=false\ningredients-customization=false")

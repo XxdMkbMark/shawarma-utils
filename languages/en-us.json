@@ -32,7 +32,7 @@
     "messages": {
         "exiting": "Exiting...",
         "invalid_option": "Invalid option",
-        "config_not_found": "Config file not found. Creating a new one...",
+        "config_not_found": "Config file not found. Creating new ones...",
         "config_error": "Failed to create config file, please check if you have permissions to write into the folder.",
         "press_any_key": "Press any key to continue...",
         "first_time_guide": "This guide will help you set hotkeys to control the game.",
