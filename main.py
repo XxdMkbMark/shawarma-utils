@@ -1,4 +1,4 @@
-import os,sys,time,pyautogui,keyboard
+import os,sys,time,pyautogui,keyboard,json
 from colorama import Fore, Back, Style, just_fix_windows_console
 just_fix_windows_console()
 print(Style.RESET_ALL)
@@ -6,24 +6,32 @@ print(Style.RESET_ALL)
 def clearConsole():
     os.system('cls' if os.name == 'nt' else 'clear')
 
+def localization():
+    pass
+
 def init():
     clearConsole()
-    global absPath
+
+    global absPath,inGamePath,hotkeyPath,posPath
     absPath = os.getcwd()
-    if os.path.exists(absPath+"/config/in-game.conf"):
+    inGamePath = absPath+"/config/in-game.conf"
+    hotkeyPath = absPath+"/config/hotkey.conf"
+    posPath = absPath+"/config/pos.conf"
+
+    if os.path.exists(inGamePath):
         pass
     else:
         log("warn", "Config file not found. Creating a new one...")
         time.sleep(1)
-        temp=open(absPath+"/config/in-game.conf","w")
+        temp=open(inGamePath,"w")
         temp.write("language=english\nworker=1\nburrito-machine=1\nwarpping-machine=1\ningredients-click-count=1\ngrilling-pan=1\ncup=1\nsoda-machine=1\nfrier=1\npotato-slicer=1\nshawarma-slicer=1\nforth-customer=false\ningredients-customization=false")
         temp.close()
-        temp=open(absPath+"/config/hotkey.conf","w")
+        temp=open(hotkeyPath,"w")
         temp.write("first-time-use=true\npickle-sauce-juice-etc=undefined\n")
         temp.close()
-        temp=open(absPath+"/config/pos.conf","w")
+        temp=open(posPath,"w")
         temp.write("resolution=undefined\n")
-        if not os.path.exists(absPath+"/config/in-game.conf"):
+        if not os.path.exists(inGamePath):
             log("error", "Failed to create config file, please check if you have permissions to write into the folder.")
             print("Press any key to quit...")
             keyboard.wait()
@@ -106,7 +114,7 @@ def mainMenu():
         mainMenu()
 def start():
     clearConsole()
-    flag=readCurrentValue(absPath+"/config/in-game.conf", "first-time-use")
+    flag=readCurrentValue(inGamePath, "first-time-use")
     if flag == "true":
         firstTimeUseGuide()
 
@@ -124,7 +132,7 @@ def firstTimeUseGuide():
 def settings():
     optionList=["1","2","3","4","5","6","7","8","9","10","11","12","13","14"]
     clearConsole()
-    if not os.path.exists(absPath+"/config/in-game.conf"):
+    if not os.path.exists(inGamePath):
         log("error", "Config file not found. Try to rerun the program to create a config file or create one manually.")
         print("Press any key to continue...")
         keyboard.wait()
@@ -166,17 +174,17 @@ def optionAdjust(index):
     optionInFileName=["worker", "burrito-machine", "warpping-machine", "ingredients-click-count", "grilling-pan", "cup", "soda-machine", "frier", "potato-slicer", "shawarma-slicer"]
     if index == 1:
         print("[Languages]")
-        print("Current value: "+readCurrentValue(absPath+"/config/in-game.conf", "language")+"\n")
+        print("Current value: "+readCurrentValue(inGamePath, "language")+"\n")
         print("1].English")
         print("2].中文(简体)\n")
         print("3].Back")
         option=optionInput("index")
         if option in optionList:
             if option == "1":
-                insertLines(absPath+"/config/in-game.conf", 0, "language=english")
+                insertLines(inGamePath, 0, "language=english")
                 settings()
             elif option == "2":
-                insertLines(absPath+"/config/in-game.conf", 0, "language=chinese")
+                insertLines(inGamePath, 0, "language=chinese")
                 settings()
             elif option == "3":
                 settings()
@@ -187,17 +195,17 @@ def optionAdjust(index):
 
     elif index == 12:
         print("[Forth customer]")
-        print("Current value: "+readCurrentValue(absPath+"/config/in-game.conf", "forth-customer")+"\n")
+        print("Current value: "+readCurrentValue(inGamePath, "forth-customer")+"\n")
         print("1].Enabled")
         print("2].Disabled\n")
         print("3].Back")
         option=optionInput("index")
         if option in optionList:
             if option == "1":
-                insertLines(absPath+"/config/in-game.conf", 11, "forth-customer=true")
+                insertLines(inGamePath, 11, "forth-customer=true")
                 settings()
             elif option == "2":
-                insertLines(absPath+"/config/in-game.conf", 11, "forth-customer=false")
+                insertLines(inGamePath, 11, "forth-customer=false")
                 settings()
             elif option == "3":
                 settings()
@@ -208,17 +216,17 @@ def optionAdjust(index):
 
     elif index == 13:
         print("[Ingredients customization]")
-        print("Current value: "+readCurrentValue(absPath+"/config/in-game.conf", "ingredients-customization")+"\n")
+        print("Current value: "+readCurrentValue(inGamePath, "ingredients-customization")+"\n")
         print("1].Enabled")
         print("2].Disabled\n")
         print("3].Back")
         option=optionInput("index")
         if option in optionList:
             if option == "1":
-                insertLines(absPath+"/config/in-game.conf", 12, "ingredients-customization=true")
+                insertLines(inGamePath, 12, "ingredients-customization=true")
                 settings()
             elif option == "2":
-                insertLines(absPath+"/config/in-game.conf", 12, "ingredients-customization=false")
+                insertLines(inGamePath, 12, "ingredients-customization=false")
                 settings()
             elif option == "3":
                 settings()
@@ -229,14 +237,14 @@ def optionAdjust(index):
 
     elif index >= 2 and index <= 11:
         print("["+optionDisplayName[index-2]+"]")
-        currentValue=readCurrentValue(absPath+"/config/in-game.conf", optionInFileName[index-2])
+        currentValue=readCurrentValue(inGamePath, optionInFileName[index-2])
         if currentValue != None: #配置文件读到None时的错误处理
             print("Current value: "+currentValue+"\n")
         else:
             log("error", "Config file incorrect! Please refer to the example config file on Github and change your config file, or delete this config file and rerun the program to generate a new one.")
             settings()
         option=optionInput("value")
-        insertLines(absPath+"/config/in-game.conf", index-1, optionInFileName[index-2]+"="+option)
+        insertLines(inGamePath, index-1, optionInFileName[index-2]+"="+option)
         settings()
     
     else:
