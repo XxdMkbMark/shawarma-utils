@@ -21,6 +21,8 @@ def init():
         temp=open(absPath+"/config/hotkey.conf","w")
         temp.write("first-time-use=true\npickle-sauce-juice-etc=undefined\n")
         temp.close()
+        temp=open(absPath+"/config/pos.conf","w")
+        temp.write("resolution=undefined\n")
         if not os.path.exists(absPath+"/config/in-game.conf"):
             log("error", "Failed to create config file, please check if you have permissions to write into the folder.")
             print("Press any key to quit...")
