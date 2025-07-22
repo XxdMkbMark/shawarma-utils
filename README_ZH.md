@@ -22,7 +22,7 @@
 **A:** 请确认你已经安装了Python 3.10/3.11和 [`requirements.txt`](https://raw.githubusercontent.com/XxdMkbMark/shawarma-utils/main/requirements.txt) 中的库.
 
 **Q:** 我第一次运行这个程序时它显示 "Failed to create config file".  
-**A:** 确认你是否对这个文件夹有写入权限，如果问题依然存在，你可以下载示例配置文件 [`config.conf`](https://raw.githubusercontent.com/XxdMkbMark/shawarma-utils/main/config.conf) 并把它放进文件夹中
+**A:** 确认你是否对这个文件夹有写入权限，如果问题依然存在，你可以下载示例配置文件 [`in-game.conf`](https://raw.githubusercontent.com/XxdMkbMark/shawarma-utils/main/config/in-game.conf)[`hotkey.conf`](https://raw.githubusercontent.com/XxdMkbMark/shawarma-utils/main/config/hotkey.conf)[`pos.conf`](https://raw.githubusercontent.com/XxdMkbMark/shawarma-utils/main/config/pos.conf) 并把它放进`./config`文件夹中
 
 ### 遇到了更多问题?
 
