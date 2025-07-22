@@ -64,9 +64,9 @@ def printTitle():
     print(Fore.LIGHTBLUE_EX + "        Shawarma Legend Utils - v1.0.7        " + Style.RESET_ALL)
     print("This is a utility for the game Shawarma Legend.")
 
-def insertLines(filename, line, content):
+def insertLines(filePath, line, content):
     #读行
-    with open(filename, 'r') as f:
+    with open(filePath, 'r') as f:
         lines = f.readlines()
     #删除行原有内容并插入列表
     if 0 <= line < len(lines):
@@ -77,11 +77,11 @@ def insertLines(filename, line, content):
         time.sleep(1)
         sys.exit(1)
     #写行
-    with open(filename, 'r+') as f:
+    with open(filePath, 'r+') as f:
         f.writelines(lines)
 
-def readCurrentValue(filename, option): #只用于设置读取当前值！不要用在其他地方！
-    with open(filename, 'r') as f:
+def readCurrentValue(filePath, option): #只用于设置读取当前值！不要用在其他地方！
+    with open(filePath, 'r') as f:
         lines = f.readlines()
         for i in lines:
             if i.startswith(option):
