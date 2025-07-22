@@ -22,7 +22,7 @@ A utility for the game Shawarma Legend. Simple program written using Python.
 **A:** Make sure you've installed Python 3.10/3.11 and the libraries listed in [`requirements.txt`](https://raw.githubusercontent.com/XxdMkbMark/shawarma-utils/main/requirements.txt).
 
 **Q:** It says "Failed to create config file" when I run the program for the first time.  
-**A:** Check if you have permission to write to the folder. If this error still exists, you can download the example config file [`config.conf`](https://raw.githubusercontent.com/XxdMkbMark/shawarma-utils/main/config.conf) and put it into the folder.
+**A:** Check if you have permission to write to the folder. If this error still exists, you can download the example config file [`in-game.conf`](https://raw.githubusercontent.com/XxdMkbMark/shawarma-utils/main/config/in-game.conf)[`hotkey.conf`](https://raw.githubusercontent.com/XxdMkbMark/shawarma-utils/main/config/hotkey.conf)[`pos.conf`](https://raw.githubusercontent.com/XxdMkbMark/shawarma-utils/main/config/pos.conf) and put it into the `./config` folder.
 
 ### Met more problems?
 
