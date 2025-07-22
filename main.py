@@ -1,4 +1,4 @@
-import os,sys,time,msvcrt,pyautogui,keyboard
+import os,sys,time,pyautogui,keyboard
 from colorama import Fore, Back, Style, just_fix_windows_console
 just_fix_windows_console()
 print(Style.RESET_ALL)
@@ -19,12 +19,12 @@ def init():
         temp.write("language=english\nworker=1\nburrito-machine=1\nwarpping-machine=1\ningredients-click-count=1\ngrilling-pan=1\ncup=1\nsoda-machine=1\nfrier=1\npotato-slicer=1\nshawarma-slicer=1\nforth-customer=false\ningredients-customization=false\nfirst-time-use=true")
         temp.close()
         temp=open(absPath+"\hotkey.conf","w")
-        temp.write()
+        temp.write("pickle-sauce-juice-etc=undefined\n")
         temp.close()
         if not os.path.exists(absPath+"/config.conf"):
             log("error", "Failed to create config file, please check if you have permissions to write into the folder.")
             print("Press any key to quit...")
-            msvcrt.getch()
+            keyboard.wait()
             sys.exit(1)
 
 def log(status, message):
@@ -125,7 +125,7 @@ def settings():
     if not os.path.exists(absPath+"/config.conf"):
         log("error", "Config file not found. Try to rerun the program to create a config file or create one manually.")
         print("Press any key to continue...")
-        msvcrt.getch()
+        keyboard.wait()
         mainMenu()
     printTitle()
     print(Fore.LIGHTGREEN_EX + "----------------- [Settings] -----------------" + Style.RESET_ALL)
