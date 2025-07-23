@@ -32,7 +32,7 @@
     "messages": {
         "exiting": "正在退出...",
         "invalid_option": "无效选项",
-        "option_doesn't_exist": "这个选项似乎并不存在 (不应该会有这个问题啊...)，如果你坚信这是一个bug，请在Github上报告。",
+        "option_doesn't_exist": "这个选项似乎并不存在 (不应该会出现这个问题啊...)，如果你坚信这是一个bug，请在Github上报告。",
         "config_not_found": "没有找到配置文件，正在创建新的配置文件...",
         "config_error": "无法创建配置文件，请检查是否有写入文件夹的权限。",
         "press_any_key": "按任意键继续...",
