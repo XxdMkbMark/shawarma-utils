@@ -10,7 +10,7 @@ def press2Continue():
     with pynput.keyboard.Listener(on_press=lambda key: False) as listener:
         listener.join()
 
-def localization(key,pos=0):
+def localization(key,pos="All"):
     try:
         try:
             with open(inGamePath, "r", encoding="utf-8") as f: #读取配置文件中的当前语言
@@ -22,8 +22,11 @@ def localization(key,pos=0):
         filePath = absPath+"/languages/"+lang+".json"
         with open(filePath, "r", encoding="utf-8") as f: #读取语言文件，找到对应键值
             translations = json.load(f)
-            content=translations.get(key, f"%{key}%")
-            return content[pos]
+            content=translations.get(key, "%[Internal Error: Key not found, in func:localization]%") #获取指定键值下的内容
+            if pos=="All": #如果传参传入All则返回获取到的所有内容
+                return content
+            else: #否则返回指定index的内容（一般用于单分类下多内容）
+                return content[pos]
     except FileNotFoundError:
         log("error", "Language file not found. Please download language files from the Github repository.")
         sys.exit(1)
@@ -81,7 +84,7 @@ def autoCorrectConfigFile():
 
 def printTitle():
     print(Fore.LIGHTBLUE_EX + "        Shawarma Legend Utils - v1.0.10       " + Style.RESET_ALL)
-    print("This is a utility for the game Shawarma Legend.")
+    print(localization("description","All"))
 
 def insertLines(filePath, line, content):
     #读行
@@ -92,7 +95,7 @@ def insertLines(filePath, line, content):
         del lines[line]
         lines.insert(line, content + '\n')
     else:
-        log("error", "[Internal error: line number out of range, in func:insertLines] This is definitely a bug, if you are seeing this, please report this on Github immediately.")
+        log("error", "[Internal error: line number out of range, in func:insertLines]")
         time.sleep(1)
         sys.exit(1)
     #写行
@@ -113,11 +116,11 @@ def mainMenu():
     optionList=["1","2","3","4"]
     clearConsole()
     printTitle()
-    print(Fore.LIGHTGREEN_EX + "----------------- [Main Menu] ----------------" + Style.RESET_ALL)
-    print("1]."+localization("menu_options",0))
-    print("2]."+localization("menu_options",1))
-    print("3].Quit")
-    print("4].About")
+    print(Fore.LIGHTGREEN_EX + "----------------- [" + localization() + "] ----------------" + Style.RESET_ALL)
+    print("1]."+localization("main_menu_options",0))
+    print("2]."+localization("main_menu_options",1))
+    print("3]."+localization("main_menu_options",2))
+    print("4]."+localization("main_menu_options",3))
     option=optionInput("index")
     if option in optionList:
         if option == "1":
@@ -125,7 +128,7 @@ def mainMenu():
         elif option == "2":
             settings()
         elif option == "3":
-            log("info", "Exiting...")
+            log("info", localization("messages","exiting"))
             time.sleep(0.4)
             sys.exit(0)
         elif option == "4":

@@ -1,13 +1,19 @@
 {
     "title": "Shawarma Legend Utils - v",
     "description": "This is a utility for the game Shawarma Legend.",
-    "menu_options": [
+    "main_menu_options": [
         "Start",
         "Settings",
         "Quit",
         "About"
     ],
-    "settings_options": [
+    "menu-s": [
+        "Main Menu",
+        "Settings",
+        "About",
+        "First Time Use Guide"
+    ],
+    "setting_options": [
         "Languages",
         "Worker level",
         "Burrito Machine level",

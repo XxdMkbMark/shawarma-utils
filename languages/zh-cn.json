@@ -1,13 +1,19 @@
 {
     "title": "Shawarma Legend Utils - v",
     "description": "这是用于游戏Shawarma Legend的辅助工具。",
-    "menu_options": [
+    "main_menu_options": [
         "开始",
         "设置",
         "退出",
         "关于"
     ],
-    "settings_options": [
+    "menu-s": [
+        "主菜单",
+        "设置",
+        "关于",
+        "初次使用向导"
+    ],
+    "setting_options": [
         "语言",
         "工人等级",
         "卷饼机等级",
@@ -17,9 +23,9 @@
         "杯子等级",
         "饮料机等级",
         "炸锅等级",
-        "土豆切片等级",
+        "切土豆等级",
         "切沙威玛机等级",
-        "第四位顾客",
+        "第四名顾客",
         "配料自定义",
         "返回"
     ],
