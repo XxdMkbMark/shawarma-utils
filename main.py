@@ -72,10 +72,10 @@ def optionInput(type):
         option=input(Fore.LIGHTCYAN_EX + localization("prompts","choose_option") + Style.RESET_ALL)
         return option
     elif type == "value":
-        value=input(Fore.LIGHTCYAN_EX + "Enter a new value: " + Style.RESET_ALL)
+        value=input(Fore.LIGHTCYAN_EX + localization("prompts","enter_value") + Style.RESET_ALL)
         return value
     elif type == "hotkey":
-        hotkey=input(Fore.LIGHTCYAN_EX + "Enter a new hotkey: " + Style.RESET_ALL)
+        hotkey=input(Fore.LIGHTCYAN_EX + localization("prompts","enter_hotkey") + Style.RESET_ALL)
         return hotkey
     
 def autoCorrectConfigFile():
