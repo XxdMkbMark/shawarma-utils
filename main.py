@@ -116,7 +116,7 @@ def mainMenu():
     optionList=["1","2","3","4"]
     clearConsole()
     printTitle()
-    print(Fore.LIGHTGREEN_EX + "----------------- [" + localization() + "] ----------------" + Style.RESET_ALL)
+    print(Fore.LIGHTGREEN_EX + "----------------- [" + localization("menu-s",0) + "] ----------------" + Style.RESET_ALL)
     print("1]."+localization("main_menu_options",0))
     print("2]."+localization("main_menu_options",1))
     print("3]."+localization("main_menu_options",2))
@@ -134,7 +134,7 @@ def mainMenu():
         elif option == "4":
             about()
     else:
-        log("error", "Invalid option")
+        log("error", localization)
         time.sleep(0.7)
         mainMenu()
 def start():
@@ -266,7 +266,7 @@ def optionAdjust(index):
         if currentValue != None: #配置文件读到None时的错误处理
             print("Current value: "+currentValue+"\n")
         else:
-            log("error", "Config file incorrect! Please refer to the example config file on Github and change your config file, or delete this config file and rerun the program to generate a new one.")
+            log("error", "Config file incorrect! Please refer to the example config file on Github and fix your config file, or delete this config file and rerun the program to generate a new one.")
             settings()
         option=optionInput("value")
         insertLines(inGamePath, index-1, optionInFileName[index-2]+"="+option)

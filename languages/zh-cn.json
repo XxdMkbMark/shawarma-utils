@@ -1,6 +1,6 @@
 {
     "title": "Shawarma Legend Utils - v",
-    "description": "这是用于游戏Shawarma Legend的辅助工具。",
+    "description": "这是用于游戏沙威玛传奇的辅助工具。",
     "main_menu_options": [
         "开始",
         "设置",
@@ -36,15 +36,22 @@
         "continue": "继续? [y/n]",
         "press_any_key": "按任意键继续..."
     },
-    "messages": {
-        "exiting": "正在退出...",
-        "invalid_option": "无效选项",
-        "option_doesn't_exist": "这个选项似乎并不存在 (不应该会出现这个问题啊...)，如果你坚信这是一个bug，请在Github上报告。",
-        "config_not_found": "没有找到配置文件，正在创建新的配置文件...",
-        "config_error": "无法创建配置文件，请检查是否有写入文件夹的权限。",
-        "first_time_guide": "本向导将帮助您设置控制游戏的快捷键。",
+    "errors": {
+        "invalid_option": "无效的选项",
+        "option_doesnt_exist": "这个选项似乎并不存在 (不应该会出现这个问题啊...)，如果你坚信这是一个bug，请在Github上报告。",
+        "cant_create_config": "无法创建配置文件，请检查是否有写入文件夹的权限。",
         "config_incorrect": "配置文件不正确！请参考Github上的示例配置文件修改您的配置文件，或删除此配置文件并重新运行程序以生成新的配置文件。",
-        "internal_error1": "[Internal error: line number out of range, in func:insertLines] 这绝对是一个bug，如果您看到此报错信息，请立即在Github上报告。"
+        "internal_error1": "[Internal error: line number out of range, in func:insertLines]",
+        "internal_error2": "[Internal Error: Key not found, in func:localization]"
+    },
+    "warnings": {
+        "config_not_found": "一个或多个配置文件缺失，正在创建新的配置文件..."
+    },
+    "info": {
+        "exiting": "正在退出..."
+    },
+    "messages": {
+        "first_time_guide": "本向导将帮助您设置控制游戏的快捷键。"
     },
     "language_options": [
         "English",
