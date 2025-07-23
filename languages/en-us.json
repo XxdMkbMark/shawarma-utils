@@ -32,6 +32,7 @@
     "messages": {
         "exiting": "Exiting...",
         "invalid_option": "Invalid option",
+        "option_doesn't_exist": "It seems like that this option doesn't exist (this shouldn't be happening). If you believe this is a bug, please report it on Github.",
         "config_not_found": "Config file not found. Creating new ones...",
         "config_error": "Failed to create config file, please check if you have permissions to write into the folder.",
         "press_any_key": "Press any key to continue...",

@@ -1,4 +1,4 @@
-import os,sys,time,pyautogui,keyboard,json
+import os,sys,time,pyautogui,keyboard,json,pynput
 from colorama import Fore, Back, Style, just_fix_windows_console
 just_fix_windows_console()
 print(Style.RESET_ALL)
@@ -6,16 +6,24 @@ print(Style.RESET_ALL)
 def clearConsole():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def localization(key):
+def press2Continue():
+    with pynput.keyboard.Listener(on_press=lambda key: False) as listener:
+        listener.join()
+
+def localization(key,pos=0):
     try:
-        with open(inGamePath, "r", encoding="utf-8") as f: #读取配置文件中的当前语言
-            f.seek(0)
-            lang = f.readline().split("=")[1].strip()
+        try:
+            with open(inGamePath, "r", encoding="utf-8") as f: #读取配置文件中的当前语言
+                f.seek(0)
+                lang = f.readline().split("=")[1].strip()
+        except:
+            log("error", "One or more config file not found. Try to rerun the program to create a config file or create one manually (refer to the example config files on Github).")
+            sys.exit(1)
         filePath = absPath+"/languages/"+lang+".json"
         with open(filePath, "r", encoding="utf-8") as f: #读取语言文件，找到对应键值
             translations = json.load(f)
             content=translations.get(key, f"%{key}%")
-            return content[0]
+            return content[pos]
     except FileNotFoundError:
         log("error", "Language file not found. Please download language files from the Github repository.")
         sys.exit(1)
@@ -32,7 +40,7 @@ def init():
     if os.path.exists(inGamePath) and os.path.exists(hotkeyPath) and os.path.exists(posPath):
         pass
     else:
-        log("warn", "One or more config file not found. Creating new ones...")
+        log("warn", "One or more config files not found. Creating new ones...")
         time.sleep(1)
         temp=open(inGamePath,"w",encoding="utf-8")
         temp.write("language=en-us\nworker=1\nburrito-machine=1\nwarpping-machine=1\ningredients-click-count=1\ngrilling-pan=1\ncup=1\nsoda-machine=1\nfrier=1\npotato-slicer=1\nshawarma-slicer=1\nforth-customer=false\ningredients-customization=false")
@@ -91,20 +99,23 @@ def insertLines(filePath, line, content):
     with open(filePath, 'r+', encoding="utf-8") as f:
         f.writelines(lines)
 
-def readCurrentValue(filePath, option): #只用于设置读取当前值！不要用在其他地方！
-    with open(filePath, 'r', encoding="utf-8") as f:
-        lines = f.readlines()
-        for i in lines:
-            if i.startswith(option):
-                return i.split("=")[1].strip()
+def readCurrentValue(filePath, option): #只用于读取配置当前值！不要用在其他地方！
+    try:
+        with open(filePath, 'r', encoding="utf-8") as f:
+            lines = f.readlines()
+            for i in lines:
+                if i.startswith(option):
+                    return i.split("=")[1].strip()
+    except FileNotFoundError:
+        log("error", "One or more config files not found. Try to rerun the program to create a config file or create one manually (refer to the example config files on Github).")
     
 def mainMenu():
     optionList=["1","2","3","4"]
     clearConsole()
     printTitle()
     print(Fore.LIGHTGREEN_EX + "----------------- [Main Menu] ----------------" + Style.RESET_ALL)
-    print("1]"+localization("menu_options"))
-    print("2].Settings")
+    print("1]."+localization("menu_options",0))
+    print("2]."+localization("menu_options",1))
     print("3].Quit")
     print("4].About")
     option=optionInput("index")
@@ -125,7 +136,7 @@ def mainMenu():
         mainMenu()
 def start():
     clearConsole()
-    flag=readCurrentValue(inGamePath, "first-time-use")
+    flag=readCurrentValue(hotkeyPath, "first-time-use")
     if flag == "true":
         firstTimeUseGuide()
 
@@ -144,9 +155,9 @@ def settings():
     optionList=["1","2","3","4","5","6","7","8","9","10","11","12","13","14"]
     clearConsole()
     if not os.path.exists(inGamePath):
-        log("error", "Config file not found. Try to rerun the program to create a config file or create one manually.")
+        log("error", "One or more config files not found. Try to rerun the program to create a config file or create one manually (refer to the example config files on Github).")
         print("Press any key to continue...")
-        keyboard.wait()
+        press2Continue()
         mainMenu()
     printTitle()
     print(Fore.LIGHTGREEN_EX + "----------------- [Settings] -----------------" + Style.RESET_ALL)
@@ -259,7 +270,7 @@ def optionAdjust(index):
         settings()
     
     else:
-        log("error", "It seems like that this option doesn't exist. If you believe this is a bug, please report it on Github.")
+        log("error", "It seems like that this option doesn't exist (this shouldn't be happening). If you believe this is a bug, please report it on Github.")
         time.sleep(2)
         settings()
 
