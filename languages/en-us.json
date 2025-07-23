@@ -42,7 +42,7 @@
         "cant_create_config": "Failed to create config file, please check if you have permissions to write into the folder.",
         "config_incorrect": "Config file incorrect! Please refer to the example config file on Github and fix your config file, or delete this config file and rerun the program to generate a new one.",
         "internal_error1": "[Internal error: line number out of range, in func:insertLines]",
-        "internal_error2": "[Internal Error: Key not found, in func:localization]"
+        "internal_error2": "[Internal Error: key not found, in func:localization]"
     },
     "warnings": {
         "config_not_found": "One or more config file not found. Creating new ones..."

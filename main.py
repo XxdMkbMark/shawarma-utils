@@ -53,7 +53,7 @@ def init():
         temp.close()
         temp=open(posPath,"w",encoding="utf-8")
         temp.write("resolution=undefined\n")
-        if not os.path.exists(inGamePath):
+        if not os.path.exists(inGamePath) or not os.path.exists(hotkeyPath) or not os.path.exists(posPath):
             log("error", "Failed to create config file, please check if you have permissions to write into the folder.")
             print("Press any key to quit...")
             keyboard.wait()
@@ -69,7 +69,7 @@ def log(status, message):
 
 def optionInput(type):
     if type == "index":
-        option=input(Fore.LIGHTCYAN_EX + "Choose an option: " + Style.RESET_ALL)
+        option=input(Fore.LIGHTCYAN_EX + localization("prompts","choose_option") + Style.RESET_ALL)
         return option
     elif type == "value":
         value=input(Fore.LIGHTCYAN_EX + "Enter a new value: " + Style.RESET_ALL)
@@ -128,7 +128,7 @@ def mainMenu():
         elif option == "2":
             settings()
         elif option == "3":
-            log("info", localization("messages","exiting"))
+            log("info", localization("info","exiting"))
             time.sleep(0.4)
             sys.exit(0)
         elif option == "4":
@@ -163,7 +163,7 @@ def settings():
         press2Continue()
         mainMenu()
     printTitle()
-    print(Fore.LIGHTGREEN_EX + "----------------- [Settings] -----------------" + Style.RESET_ALL)
+    print(Fore.LIGHTGREEN_EX + "----------------- [" + localization("menu-s",1) + "] -----------------" + Style.RESET_ALL)
     print("1].Languages")
     print("2].Worker level")
     print("3].Burrito Machine level")
@@ -193,7 +193,7 @@ def settings():
 def optionAdjust(index):
     clearConsole()
     printTitle()
-    print(Fore.LIGHTGREEN_EX + "----------------- [Settings] -----------------" + Style.RESET_ALL)
+    print(Fore.LIGHTGREEN_EX + "----------------- [" + localization("menu-s",1) + "] -----------------" + Style.RESET_ALL)
     optionList=["1","2","3"]
     optionDisplayName=["Worker level", "Burrito Machine level", "Warpping Machine level", "Ingredients click count", "Grilling Pan level", "Cup level", "Soda Machine level", "Frier level", "Potato Slicer level", "Shawarma Slicer level"]
     optionInFileName=["worker", "burrito-machine", "warpping-machine", "ingredients-click-count", "grilling-pan", "cup", "soda-machine", "frier", "potato-slicer", "shawarma-slicer"]

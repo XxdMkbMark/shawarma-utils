@@ -42,7 +42,7 @@
         "cant_create_config": "无法创建配置文件，请检查是否有写入文件夹的权限。",
         "config_incorrect": "配置文件不正确！请参考Github上的示例配置文件修改您的配置文件，或删除此配置文件并重新运行程序以生成新的配置文件。",
         "internal_error1": "[Internal error: line number out of range, in func:insertLines]",
-        "internal_error2": "[Internal Error: Key not found, in func:localization]"
+        "internal_error2": "[Internal Error: key not found, in func:localization]"
     },
     "warnings": {
         "config_not_found": "一个或多个配置文件缺失，正在创建新的配置文件..."
