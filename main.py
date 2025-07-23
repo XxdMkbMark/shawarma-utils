@@ -7,7 +7,6 @@ def clearConsole():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def press2Continue():
-    print(localization("prompt['press_any_key']",0))
     with pynput.keyboard.Listener(on_press=lambda key: False) as listener:
         listener.join()
 
