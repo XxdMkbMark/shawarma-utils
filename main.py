@@ -7,6 +7,7 @@ def clearConsole():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def press2Continue():
+    print(localization("prompt['press_any_key']",0))
     with pynput.keyboard.Listener(on_press=lambda key: False) as listener:
         listener.join()
 
@@ -16,7 +17,7 @@ def localization(key,pos=0):
             with open(inGamePath, "r", encoding="utf-8") as f: #读取配置文件中的当前语言
                 f.seek(0)
                 lang = f.readline().split("=")[1].strip()
-        except:
+        except FileNotFoundError:
             log("error", "One or more config file not found. Try to rerun the program to create a config file or create one manually (refer to the example config files on Github).")
             sys.exit(1)
         filePath = absPath+"/languages/"+lang+".json"
@@ -80,7 +81,7 @@ def autoCorrectConfigFile():
     pass
 
 def printTitle():
-    print(Fore.LIGHTBLUE_EX + "        Shawarma Legend Utils - v1.0.7        " + Style.RESET_ALL)
+    print(Fore.LIGHTBLUE_EX + "        Shawarma Legend Utils - v1.0.10       " + Style.RESET_ALL)
     print("This is a utility for the game Shawarma Legend.")
 
 def insertLines(filePath, line, content):
@@ -279,7 +280,7 @@ def about():
     clearConsole()
     printTitle()
     print(Fore.LIGHTGREEN_EX + "------------------- [About] ------------------" + Style.RESET_ALL)
-    print("Version: 1.0.7")
+    print("Version: 1.0.10")
     print("Made by XxdMkb_Mark using Python")
     print("Github repository: https://github.com/XxdMkbMark/Shawarma-Legend-Utils \n")
     print("1].Back")

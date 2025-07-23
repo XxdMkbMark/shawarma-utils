@@ -27,7 +27,8 @@
         "choose_option": "Choose an option: ",
         "enter_value": "Enter a new value: ",
         "enter_hotkey": "Enter a new hotkey: ",
-        "continue": "Continue? [y/n]"
+        "continue": "Continue? [y/n]",
+        "press_any_key": "Press any key to continue..."
     },
     "messages": {
         "exiting": "Exiting...",
@@ -35,7 +36,6 @@
         "option_doesn't_exist": "It seems like that this option doesn't exist (this shouldn't be happening). If you believe this is a bug, please report it on Github.",
         "config_not_found": "Config file not found. Creating new ones...",
         "config_error": "Failed to create config file, please check if you have permissions to write into the folder.",
-        "press_any_key": "Press any key to continue...",
         "first_time_guide": "This guide will help you set hotkeys to control the game.",
         "config_incorrect": "Config file incorrect! Please refer to the example config file on Github and change your config file, or delete this config file and rerun the program to generate a new one.",
         "internal_error1": "[Internal error: line number out of range, in func:insertLines] This is definitely a bug, if you are seeing this, please report this on Github immediately."
