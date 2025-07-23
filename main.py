@@ -83,7 +83,7 @@ def autoCorrectConfigFile():
     pass
 
 def printTitle():
-    print(Fore.LIGHTBLUE_EX + "        Shawarma Legend Utils - v1.0.10       " + Style.RESET_ALL)
+    print(Fore.LIGHTBLUE_EX + "        Shawarma Legend Utils - v1.0.11       " + Style.RESET_ALL)
     print(localization("description","All"))
 
 def insertLines(filePath, line, content):
@@ -282,11 +282,11 @@ def about():
     clearConsole()
     printTitle()
     print(Fore.LIGHTGREEN_EX + "------------------- [" + localization("menu-s",2) + "] ------------------" + Style.RESET_ALL)
-    print("Version: 1.0.10")
+    print(localization("messages","version")+": 1.0.11")
     print("Made by XxdMkb_Mark using Python")
     print("Github repository: https://github.com/XxdMkbMark/Shawarma-Legend-Utils \n")
     print("1].Back")
-    option=input(Fore.LIGHTCYAN_EX + "Choose an option: " + Style.RESET_ALL)
+    option=optionInput("index")
     if option in optionList:
         if option == "1":
             mainMenu()
