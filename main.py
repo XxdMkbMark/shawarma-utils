@@ -6,8 +6,19 @@ print(Style.RESET_ALL)
 def clearConsole():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def localization():
-    pass
+def localization(key):
+    try:
+        with open(inGamePath, "r", encoding="utf-8") as f: #读取配置文件中的当前语言
+            f.seek(0)
+            lang = f.readline().split("=")[1].strip()
+        filePath = absPath+"/languages/"+lang+".json"
+        with open(filePath, "r", encoding="utf-8") as f: #读取语言文件，找到对应键值
+            translations = json.load(f)
+            content=translations.get(key, f"%{key}%")
+            return content[0]
+    except FileNotFoundError:
+        log("error", "Language file not found. Please download language files from the Github repository.")
+        sys.exit(1)
 
 def init():
     clearConsole()
@@ -18,18 +29,18 @@ def init():
     hotkeyPath = absPath+"/config/hotkey.conf"
     posPath = absPath+"/config/pos.conf"
 
-    if os.path.exists(inGamePath):
+    if os.path.exists(inGamePath) and os.path.exists(hotkeyPath) and os.path.exists(posPath):
         pass
     else:
-        log("warn", "Config file not found. Creating new ones...")
+        log("warn", "One or more config file not found. Creating new ones...")
         time.sleep(1)
-        temp=open(inGamePath,"w")
-        temp.write("language=english\nworker=1\nburrito-machine=1\nwarpping-machine=1\ningredients-click-count=1\ngrilling-pan=1\ncup=1\nsoda-machine=1\nfrier=1\npotato-slicer=1\nshawarma-slicer=1\nforth-customer=false\ningredients-customization=false")
+        temp=open(inGamePath,"w",encoding="utf-8")
+        temp.write("language=en-us\nworker=1\nburrito-machine=1\nwarpping-machine=1\ningredients-click-count=1\ngrilling-pan=1\ncup=1\nsoda-machine=1\nfrier=1\npotato-slicer=1\nshawarma-slicer=1\nforth-customer=false\ningredients-customization=false")
         temp.close()
-        temp=open(hotkeyPath,"w")
+        temp=open(hotkeyPath,"w",encoding="utf-8")
         temp.write("first-time-use=true\npickle-sauce-juice-etc=undefined\n")
         temp.close()
-        temp=open(posPath,"w")
+        temp=open(posPath,"w",encoding="utf-8")
         temp.write("resolution=undefined\n")
         if not os.path.exists(inGamePath):
             log("error", "Failed to create config file, please check if you have permissions to write into the folder.")
@@ -66,7 +77,7 @@ def printTitle():
 
 def insertLines(filePath, line, content):
     #读行
-    with open(filePath, 'r') as f:
+    with open(filePath, 'r', encoding="utf-8") as f:
         lines = f.readlines()
     #删除行原有内容并插入列表
     if 0 <= line < len(lines):
@@ -77,11 +88,11 @@ def insertLines(filePath, line, content):
         time.sleep(1)
         sys.exit(1)
     #写行
-    with open(filePath, 'r+') as f:
+    with open(filePath, 'r+', encoding="utf-8") as f:
         f.writelines(lines)
 
 def readCurrentValue(filePath, option): #只用于设置读取当前值！不要用在其他地方！
-    with open(filePath, 'r') as f:
+    with open(filePath, 'r', encoding="utf-8") as f:
         lines = f.readlines()
         for i in lines:
             if i.startswith(option):
@@ -92,7 +103,7 @@ def mainMenu():
     clearConsole()
     printTitle()
     print(Fore.LIGHTGREEN_EX + "----------------- [Main Menu] ----------------" + Style.RESET_ALL)
-    print("1].Start")
+    print("1]"+localization("menu_options"))
     print("2].Settings")
     print("3].Quit")
     print("4].About")
@@ -181,10 +192,10 @@ def optionAdjust(index):
         option=optionInput("index")
         if option in optionList:
             if option == "1":
-                insertLines(inGamePath, 0, "language=english")
+                insertLines(inGamePath, 0, "language=en-us")
                 settings()
             elif option == "2":
-                insertLines(inGamePath, 0, "language=chinese")
+                insertLines(inGamePath, 0, "language=zh-cn")
                 settings()
             elif option == "3":
                 settings()
