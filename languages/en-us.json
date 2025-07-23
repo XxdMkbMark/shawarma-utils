@@ -51,6 +51,7 @@
         "exiting": "Exiting..."
     },
     "messages": {
+        "version": "Version",
         "first_time_guide": "This guide will help you set hotkeys to control the game."
     },
     "language_options": [

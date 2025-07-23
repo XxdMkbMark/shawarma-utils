@@ -51,6 +51,7 @@
         "exiting": "正在退出..."
     },
     "messages": {
+        "version": "版本",
         "first_time_guide": "本向导将帮助您设置控制游戏的快捷键。"
     },
     "language_options": [

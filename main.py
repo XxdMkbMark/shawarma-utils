@@ -281,7 +281,7 @@ def about():
     optionList=["1"]
     clearConsole()
     printTitle()
-    print(Fore.LIGHTGREEN_EX + "------------------- [About] ------------------" + Style.RESET_ALL)
+    print(Fore.LIGHTGREEN_EX + "------------------- [" + localization("menu-s",2) + "] ------------------" + Style.RESET_ALL)
     print("Version: 1.0.10")
     print("Made by XxdMkb_Mark using Python")
     print("Github repository: https://github.com/XxdMkbMark/Shawarma-Legend-Utils \n")
